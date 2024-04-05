@@ -6,8 +6,16 @@ class OrdersController < ApplicationController
     @list_of_orders = matching_orders.order({ :created_at => :desc })
 
     @api_key = 'co7n839r01qgik2hbd50co7n839r01qgik2hbd5g'
+    url = "https://finnhub.io/api/v1/quote?symbol=#{params[:stock]}&token=#{@api_key}"
+    response = HTTParty.get(url)
+    @quote = response.parsed_response
 
+    if @quote.fetch("c") == 0
+      redirect_to "/route_to_order/#{params[:path_id]}", flash: { error: "Error on input: Not a valid ticker. Try Again." }
+    
+    else
     render({ :template => "orders/index", :layout => false})
+  end
   end
 
   def show

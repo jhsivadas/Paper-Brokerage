@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "login" %>
 
-  
+
      
 <form action="/placeholder/<%=params[:path_id]%>/" method="post">
     <h1>What stock would you like to trade?</h1>
@@ -10,6 +10,11 @@
 
         <input type="text" value="AAPL" id="holdings_box" name="query_holdings">
       </div>
+      <% flash.each do |type, message| %>
+  <div class="<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
   <br>
        <div>
         <label for="type_box">

@@ -1,8 +1,5 @@
 <%= stylesheet_link_tag "login" %>
-<%require 'httparty'%>
-  <%url = "https://finnhub.io/api/v1/quote?symbol=#{params[:stock]}&token=#{@api_key}"%>
-  <%response = HTTParty.get(url)%>
-  <%quote = response.parsed_response%>
+
 
 <form action="/insert_order/<%=params[:type]%>" method="post">
 
@@ -30,7 +27,7 @@
     <%end%>
 
   <% if params[:type] == "Buy" %>
-    <%maxi = cash/quote.fetch("c")%>
+    <%maxi = cash/@quote.fetch("c")%>
     <% else %>
     <%maxi = shares%>
   <% end %>
@@ -66,7 +63,7 @@
 
   
     
-  <p>Current Price: <%=quote.fetch("c")%></p>
+  <p>Current Price: <%=@quote.fetch("c")%></p>
 
   <button>
     Create order
