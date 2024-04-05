@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Holding #<%= @the_holding.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/holdings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_holding/<%= @the_holding.id %>">
+          Delete holding
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Ticker
+      </dt>
+      <dd>
+        <%= @the_holding.ticker %>
+      </dd>
+
+      <dt>
+        Shares
+      </dt>
+      <dd>
+        <%= @the_holding.shares %>
+      </dd>
+
+      <dt>
+        Account
+      </dt>
+      <dd>
+        <%= @the_holding.account_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_holding.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_holding.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit holding
+    </h2>
+
+    <form action="/modify_holding/<%= @the_holding.id %>"  method="post" >
+      <div>
+        <label for="ticker_box">
+          Ticker
+        </label>
+
+        <input type="text" id="ticker_box" name="query_ticker" value="<%= @the_holding.ticker %>">
+      </div>
+
+      <div>
+        <label for="shares_box">
+          Shares
+        </label>
+
+        <input type="text" id="shares_box" name="query_shares" value="<%= @the_holding.shares %>">
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id" value="<%= @the_holding.account_id %>">
+      </div>
+
+      <button>
+        Update holding
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all holdings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new holding
+    </h2>
+
+    <form action="/insert_holding" method="post">
+      <div>
+        <label for="ticker_box">
+          Ticker
+        </label>
+
+        <input type="text" id="ticker_box" name="query_ticker">
+      </div>
+
+      <div>
+        <label for="shares_box">
+          Shares
+        </label>
+
+        <input type="text" id="shares_box" name="query_shares">
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id">
+      </div>
+
+      <button>
+        Create holding
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Ticker
+        </th>
+
+        <th>
+          Shares
+        </th>
+
+        <th>
+          Account
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_holdings.each do |a_holding| %>
+      <tr>
+        <td>
+          <%= a_holding.id %>
+        </td>
+
+        <td>
+          <%= a_holding.ticker %>
+        </td>
+
+        <td>
+          <%= a_holding.shares %>
+        </td>
+
+        <td>
+          <%= a_holding.account_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_holding.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_holding.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/holdings/<%= a_holding.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

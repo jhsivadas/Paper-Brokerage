@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Order #<%= @the_order.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/orders">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_order/<%= @the_order.id %>">
+          Delete order
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Ticker
+      </dt>
+      <dd>
+        <%= @the_order.ticker %>
+      </dd>
+
+      <dt>
+        Shares
+      </dt>
+      <dd>
+        <%= @the_order.shares %>
+      </dd>
+
+      <dt>
+        Type
+      </dt>
+      <dd>
+        <%= @the_order.type %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_order.user_id %>
+      </dd>
+
+      <dt>
+        Account
+      </dt>
+      <dd>
+        <%= @the_order.account_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_order.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_order.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit order
+    </h2>
+
+    <form action="/modify_order/<%= @the_order.id %>"  method="post" >
+      <div>
+        <label for="ticker_box">
+          Ticker
+        </label>
+
+        <input type="text" id="ticker_box" name="query_ticker" value="<%= @the_order.ticker %>">
+      </div>
+
+      <div>
+        <label for="shares_box">
+          Shares
+        </label>
+
+        <input type="text" id="shares_box" name="query_shares" value="<%= @the_order.shares %>">
+      </div>
+
+      <div>
+        <label for="type_box">
+          Type
+        </label>
+
+        <input type="text" id="type_box" name="query_type" value="<%= @the_order.type %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_order.user_id %>">
+      </div>
+
+      <div>
+        <label for="account_id_box">
+          Account
+        </label>
+
+        <input type="text" id="account_id_box" name="query_account_id" value="<%= @the_order.account_id %>">
+      </div>
+
+      <button>
+        Update order
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

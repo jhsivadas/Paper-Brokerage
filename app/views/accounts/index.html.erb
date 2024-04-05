@@ -1,0 +1,146 @@
+ <%= stylesheet_link_tag "accounts" %>
+<div>
+  <div>
+  <% if current_user != nil %>
+    <h1>
+      Welcome back <%= User.where({:id=>current_user.id}).at(0).email%>
+    </h1>
+    <h3>$<%=@total%></h3>
+    <h4>Value as of <%=Date.today.strftime('%B %d, %Y')%></h4>
+  <%end%>
+  </div>
+</div>
+<hr>
+
+
+
+
+<h1>
+      Account Information
+</h1>
+<div>
+  <div>
+  <% if current_user != nil %>
+    <h2>
+      Add a new paper trading account
+    </h2>
+
+
+    
+    <form action="/insert_account" method="post">
+      <div>
+        <label for="holdings_box">
+        </label>
+
+        <input type="hidden" value=0 id="holdings_box" name="query_holdings">
+      </div>
+
+      <div>
+        <label for="cash_box">
+        </label>
+
+        <input type="hidden" value=100000 id="cash_box" name="query_cash">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+        </label>
+
+        <input type="hidden" value=<%=current_user.id%>id="user_id_box" name="query_user_id">
+      </div>
+
+      <button>
+        Create account
+      </button>
+    </form>
+    <%end%>
+  </div>
+</div>
+
+<h2>
+      All Accounts
+</h2>
+<div>
+  <div>
+  
+      <% @list_of_accounts.each do |an_account| %>
+      <hr>
+      <br>
+      <br>
+      <h3>Account #<%=an_account.id%></h3>
+
+      <div class="fund-container">
+          <table>
+              <tr>
+                  <td class="fund-name"><br><span class="settlement-fund">Total Holdings Value</span></td>
+                  <td class="fund-value">$<%=an_account.holdings=%></td>
+              </tr>
+              <tr>
+                  <td class="total-credits">Total cash available</td>
+                  <td class="credits-value">$<%=an_account.cash=%></td>
+              </tr>
+          </table>
+          
+          
+      </div>
+      <h4>Holdings</h4>
+      
+
+      <% holdings = Holding.where(:account_id => an_account.id)%>
+
+      <% if holdings != nil %>
+      <table>
+      <tr>
+         <th>Ticker</t>
+          <th>Number of Shares</th>
+          <th>Current Share Price</th>
+          <th>Current Balance</th>
+          <th>Purchase Price</th>
+          <th>Gain/Loss</th>
+        
+      
+      </tr>
+
+      
+       
+      
+      <% holdings.each do |holding|%>
+      <%require 'httparty'%>
+      <%url = "https://finnhub.io/api/v1/quote?symbol=#{holding.ticker}&token=#{@api_key}"%>
+      <%response = HTTParty.get(url)%>
+      <%quote = response.parsed_response%>
+      
+      <tr>
+      <td><%=holding.ticker%></td>
+      <td><%=holding.shares%></td>
+      <td><%=quote.fetch("c")%></td>
+      <td><%=quote.fetch("c")*holding.shares%></td>
+      <td><%=holding.purchase_price%></td>
+      <td><%=(quote.fetch("c") - holding.purchase_price)*holding.shares%></td>
+
+      
+
+
+
+      </tr>
+      
+   
+
+
+        <%end%>
+        <%# end %>
+      <%end%>
+      </table>
+      <div>
+          <a href="/route_to_order/<%=an_account.id%>" class="button-order">Trade Shares</a>
+          <!--<a href="/route_to_order/<%#=an_account.id%>" class="button-order">Add Money</a>-->
+          <a href="/delete_account/<%=an_account.id%>" class="button-order">Delete Account</a>
+          </div>
+      <%end%>
+      
+      
+      
+  </div>
+</div>
+
+<hr>

@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <div class="container">
+        <% if current_user != nil %>
+          <a id="loginBtn" href="/users/sign_out" class="btn fancy-btn">Sign Out</a>
+        <a id="loginBtn" href="/users/edit" class="btn fancy-btn">Edit Profile</a>
+
+        <% end %>
+        
+        
+    </div>
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

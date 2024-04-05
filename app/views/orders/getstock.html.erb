@@ -1,0 +1,32 @@
+<%= stylesheet_link_tag "login" %>
+
+  
+     
+<form action="/placeholder/<%=params[:path_id]%>/" method="post">
+    <h1>What stock would you like to trade?</h1>
+      <div>
+        <label for="holdings_box">Ticker:
+        </label>
+
+        <input type="text" value="AAPL" id="holdings_box" name="query_holdings">
+      </div>
+  <br>
+       <div>
+        <label for="type_box">
+          Order Type
+        </label>
+
+        <select id="type_box" name="query_type">
+    <option value="Buy">Buy</option>
+    <option value="Sell">Sell</option>
+  </select>
+
+<br>
+<br>
+<button>
+  Choose stock
+</button>
+<br>
+<br>
+<a href="/accounts">Go home</a>
+</form>

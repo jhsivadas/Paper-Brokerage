@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Account #<%= @the_account.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/accounts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_account/<%= @the_account.id %>">
+          Delete account
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Holdings
+      </dt>
+      <dd>
+        <%= @the_account.holdings %>
+      </dd>
+
+      <dt>
+        Cash
+      </dt>
+      <dd>
+        <%= @the_account.cash %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_account.user_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_account.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_account.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit account
+    </h2>
+
+    <form action="/modify_account/<%= @the_account.id %>"  method="post" >
+      <div>
+        <label for="holdings_box">
+          Holdings
+        </label>
+
+        <input type="text" id="holdings_box" name="query_holdings" value="<%= @the_account.holdings %>">
+      </div>
+
+      <div>
+        <label for="cash_box">
+          Cash
+        </label>
+
+        <input type="text" id="cash_box" name="query_cash" value="<%= @the_account.cash %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_account.user_id %>">
+      </div>
+
+      <button>
+        Update account
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,78 @@
+<%= stylesheet_link_tag "login" %>
+<%require 'httparty'%>
+  <%url = "https://finnhub.io/api/v1/quote?symbol=#{params[:stock]}&token=#{@api_key}"%>
+  <%response = HTTParty.get(url)%>
+  <%quote = response.parsed_response%>
+
+<form action="/insert_order/<%=params[:type]%>" method="post">
+
+<h2>
+  Add a new <%=params[:type]%> order for <%=params[:stock].upcase%>
+</h2>
+  <div>
+    <label for="ticker_box">
+    </label>
+
+    <input type="hidden" id="ticker_box" name="query_ticker" value="<%=params[:stock].upcase%>">
+  </div>
+
+  <div>
+  <label for="shares_box">
+    Shares
+  </label>
+
+  <%cash = Account.where(:id =>params[:path_id]).at(0).cash%>
+
+  <%shares = 0%>
+  <%Holding.where({:ticker => params[:stock], :account_id => params[:path_id]}).all.each do |holding|%>
+
+  <%shares = shares + holding.shares%>
+    <%end%>
+
+  <% if params[:type] == "Buy" %>
+    <%maxi = cash/quote.fetch("c")%>
+    <% else %>
+    <%maxi = shares%>
+  <% end %>
+
+  <input type="number" id="shares_box" name="query_shares"  step="1" min="0" max="<%=maxi%>" value="<%=maxi%>">
+  </div>
+
+  
+
+
+  <div>
+    <label for="user_id_box">
+
+    </label>
+
+    <input type="hidden" id="user_id_box" name="query_user_id" value=<%=current_user.id%>
+  </div>
+
+  <div>
+    <label for="account_id_box">
+    </label>
+
+    <input type="hidden" id="account_id_box" name="query_account_id" value=<%=params[:path_id]%>>
+  </div>
+
+  <div>
+    <label for="account_type">
+    </label>
+
+    <input type="hidden" id="account_type" name="query_type" value=<%=params[:type]%>>
+  </div>
+
+
+  
+    
+  <p>Current Price: <%=quote.fetch("c")%></p>
+
+  <button>
+    Create order
+  </button>
+  <a href="/accounts">Go home</a>
+</form>
+
+
+<hr>
