@@ -132,6 +132,8 @@ GEM
       color_namer
       rspec
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.7.11)
@@ -146,6 +148,8 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    finnhub_ruby (1.1.19)
+      typhoeus (~> 1.0, >= 1.0.1)
     git (1.18.0)
       addressable (~> 2.8)
       rchardet (~> 1.8)
@@ -377,6 +381,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2023.3)
@@ -432,6 +438,7 @@ DEPENDENCIES
   draft_generators
   draft_matchers
   faker
+  finnhub_ruby
   grade_runner
   htmlbeautifier
   http

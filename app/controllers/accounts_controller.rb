@@ -1,12 +1,13 @@
 require 'httparty'
 class AccountsController < ApplicationController
   def index
-    matching_accounts = Account.all
-
-    @list_of_accounts = matching_accounts.order({ :created_at => :desc })
+    
 
 
     if current_user != nil
+      matching_accounts = Account.where(:user_id => current_user.id)
+
+      @list_of_accounts = matching_accounts.order({ :created_at => :desc })
 
       accounts = Account.where({:user_id => current_user.id})
       @total = 0

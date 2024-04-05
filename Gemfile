@@ -7,6 +7,8 @@ gem "iex-ruby-client"
 
 gem 'httparty'
 
+gem 'finnhub_ruby'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
