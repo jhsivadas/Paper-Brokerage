@@ -63,7 +63,8 @@
 
   
     
-  <p>Current Price: <%=@quote.fetch("c")%></p>
+  <p>Current Price: $<%=@quote.fetch("c")%></p>
+  <p>Cash Available: $<%=Account.where(:id => params[:path_id]).at(0).cash%></p>
 
   <button>
     Create order
